@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login – TMS</title>
+    <meta name="description" content="Secure login for the Testing Management System.">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: var(--bg-main);
+        }
+        .login-card {
+            background: var(--bg-surface);
+            padding: 2.5rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-soft);
+            max-width: 400px;
+            width: 100%;
+        }
+        .login-card h2 {
+            margin-bottom: 1.5rem;
+            color: var(--text-main);
+            text-align: center;
+        }
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 1rem;
+        }
+        .input-group label {
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--text-main);
+        }
+        .input-group input {
+            padding: 0.8rem 1rem;
+            border: 1px solid rgba(0,0,0,0.1);
+            border-radius: 12px;
+            background: var(--bg-main);
+            color: var(--text-main);
+            font-size: 0.95rem;
+            outline: none;
+            transition: var(--transition);
+        }
+        .input-group input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(67,24,255,0.1);
+        }
+        .primary-btn {
+            width: 100%;
+            justify-content: center;
+        }
+        .error-msg {
+            color: var(--danger);
+            font-size: 0.85rem;
+            margin-top: 0.5rem;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-card">
+        <h2>Welcome Back</h2>
+        <form id="loginForm">
+            <div class="input-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" placeholder="devanshmahar@gmail.com" required>
+            </div>
+            <div class="input-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" placeholder="•••••••••••••••••" required>
+            </div>
+            <button type="submit" class="primary-btn">
+                <i class='bx bx-log-in'></i>
+                Sign In
+            </button>
+            <p class="error-msg" id="errorMsg" style="display:none;">Invalid credentials</p>
+        </form>
+    </div>
+    <script>
+        const VALID_EMAIL = 'devanshmahar@gmail.com';
+        const VALID_PASS = 'pass123456789';
+        const form = document.getElementById('loginForm');
+        const errorMsg = document.getElementById('errorMsg');
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = document.getElementById('email').value.trim();
+            const pass = document.getElementById('password').value;
+            if (email === VALID_EMAIL && pass === VALID_PASS) {
+                localStorage.setItem('loggedIn', 'true');
+                // simple redirect to main dashboard (index.html)
+                window.location.href = 'index.html';
+            } else {
+                errorMsg.style.display = 'block';
+            }
+        });
+    </script>
+</body>
+</html>
